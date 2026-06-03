@@ -1,78 +1,20 @@
-# Rails CRUD API Template
+# About
+User model takes a `name` and `date of birth`.
 
-## Overview
+## Task: implement three methods in user model:
 
-This is a minimal Ruby on Rails API template used to:
-* practice CRUD operations, 
-* RESTful API design, 
-* data transformations, and 
-* debugging workflows.
+1. `User#birthday?` - returns a Boolean for whether today is their birthday
+2. `User#age` - returns an integer representing the user’s age in years
+3. `User#next_birthday` - returns the date of the user’s next birthday
 
-It is intentionally lightweight to support fast iteration and practice.
-
----
-
-## Tech Stack
-
-* Ruby
-* Ruby on Rails (API-only mode)
-* PostgreSQL (already 'rails db:create + rails db:migrate')
-* RSpec (testing)
-* RuboCop (linting)
-* SimpleCov (test coverage)
-
----
-
-## Purpose
-
-This template is used to practice core backend engineering patterns:
-
-* CRUD API development (create, read, update, delete)
-* RESTful routing and controller design
-* Data filtering and transformation logic
-* Writing and debugging tests
-* Simulating real-world backend tasks
-
----
-
-## Setup
-
-```bash id="q8m1xv"
-bundle install
-rails db:create
-rails db:migrate
-rails server
-```
-
----
-
-## Testing
-
-```bash id="t4k9lz"
-bundle exec rspec
-```
-
----
-
-## Linting
-
-```bash id="w2p7qa"
-bundle exec rubocop
-```
-
----
-
-## Example Endpoints (practice targets)
-
-* POST /users
-* GET /users/:id
-* PATCH /users/:id
-* DELETE /users/:id
-* GET /users?status=active (filtering)
-
----
-
-## Notes
-
-This project is intentionally minimal. 
-Features addition incrementally to focus on understanding core backend patterns rather than framework complexity.
+# MVF: IDEATION PLANNING (BRAINSTORMING - STEPS)
+1. Use CRUD api rails template - OK
+2. create model and manually test as you go in irb and write comments/short assumptions as you go (e.g pseudocode)
+3. !!! DANGER ZONE 29/2, 2000. - OK
+4. Migrate - null
+5. Validate 
+6. Leave assumptions, explanations
+7. TEST manually all edge cases
+8. add controller
+9. add routes
+10. maybe add service?-TBC

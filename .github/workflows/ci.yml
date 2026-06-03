@@ -1,0 +1,58 @@
+name: CI
+
+# When this workflow runs:
+# - on every pull request (to check code before merging)
+# - on every push to main (to ensure main stays stable)
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  scan_ruby:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pull the code from the repo into the CI environment
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Ruby using the version defined in .ruby-version
+      # bundler-cache: true speeds up installs by caching gems
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      # 3. Install dependencies explicitly for clarity and reliability
+      - name: Install dependencies
+        run: bundle install
+
+      # 4. Security scan using Brakeman
+      # This checks for common Rails security issues (SQL injection, etc.)
+      - name: Run Brakeman security scan
+        run: bundle exec brakeman --no-pager
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Same setup pattern as above job
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      # Install gems so RuboCop has everything it needs
+      - name: Install dependencies
+        run: bundle install
+
+      # Linting step:
+      # Ensures consistent style and catches simple code issues
+      - name: Lint code
+        run: bundle exec rubocop -f github

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  # User model takes a `name` and `date of birth`
   validates :name, presence: true
   validates :dob, presence: true
 
@@ -42,6 +43,6 @@ class User < ApplicationRecord
   end
 end
 
-# TODO:
-# 1. keep injecting today for (deterministic) testing purposes!
-# 2. once tests pass etc you can remove it to give the model a "production look"
+# NOTES:
+# 1. keepT injecting 'today' for (deterministic) testing purposes!
+# 2. once tests pass etc they can be removed to give the model a "production look"

@@ -6,5 +6,9 @@ class CreateUsers < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
+
+    add_check_constraint :users,
+      "dob <= CURRENT_DATE",
+      name: "users_dob_not_future"
   end
 end

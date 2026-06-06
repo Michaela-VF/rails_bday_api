@@ -29,6 +29,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def birthday
+    user = User.find(params[:id])
+    date = Date.parse(params[:date])
+
+    render json: { result: user.birthday?(date) }
+  end
+
+    def age
+      user = User.find(params[:id])
+      date = Date.parse(params[:date])
+
+      render json: { result: user.age(date) }
+    end
+
+  def next_birthday
+    user = User.find(params[:id])
+    date = Date.parse(params[:date])
+
+    render json: { result: user.next_birthday(date) }
+  end
+
   private
 
   def user_params

@@ -1,7 +1,13 @@
 class User < ApplicationRecord
   # User model takes a `name` and `date of birth`
   validates :name, presence: true
-  validates :dob, presence: true
+  validates :dob,
+    presence: true,
+    comparison: {
+      # N.B: Rails boots and validates when the app starts and the model is loaded!
+      # So better stick to lambda for accurate date.current! (or make a private equivalent validation method?)
+      less_than_or_equal_to: -> { Date.current }
+    }
 
   # User#birthday?
   # returns a Boolean for whether today is their birthday
@@ -21,7 +27,7 @@ class User < ApplicationRecord
 
   # User#next_birthday
   # returns the date of the user’s next birthday
-  def next_birthday(today = Date.today)
+  def next_birthday(today = Date.current)
     birthday_this_year =  this_year_birthday(today) # this is to avoid computing it every time in the ternary below
 
     birthday_this_year < today ? birthday_this_year.next_year : birthday_this_year
